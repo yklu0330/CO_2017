@@ -1,9 +1,10 @@
-# Homework Description
-## Goal
+# Lab 1: 32-bit ALU
+## Homework Description
+### Goal
 
 The goal of this LAB is to implement a 32-bit ALU (Arithmetic Logic Unit). ALU is the basic computing component of a CPU. Its operations include AND, OR, addition, subtraction, etc. This series of LABs will help you understand the CPU architecture. LAB 1 will be reused; you will use this module in later LABs.
 
-## Basic instruction set
+### Basic instruction set
 <img src="https://i.imgur.com/WMWm5NG.png" width="75%">
 
 - ZCV three flags: zero, carry out, and overflow  
@@ -11,18 +12,18 @@ The goal of this LAB is to implement a 32-bit ALU (Arithmetic Logic Unit). ALU i
     - cout: must be set when carry out  
     - overflow: must be set when overflow  
 
-## Architecture diagram
+### Architecture diagram
 
 <img src="https://i.imgur.com/DGv7iZ6.png" width="80%">
 
-## Bonus: Extra instruction set
+### Bonus: Extra instruction set
 
 <img src="https://i.imgur.com/jxvb5iy.png" width="80%">
 
 <img src="https://i.imgur.com/KKUHoig.png" width="70%">
 
-# Experiment
-## Description of Implementation
+## Experiment
+### Description of Implementation
 
 1. alu_top.v
 首先，透過兩個 Mux 決定輸入的source1, 2要不要 invert，接著再從輸入的operation判斷要執行甚麼運算。
