@@ -58,8 +58,8 @@ The file”CO_P2_Result.txt” will be generated after executing the Testbench. 
 根據 ctrl_i 對 src1_i 和 src2_i 做出不同的運算，種類有 and, or, add, sub, nor, nand, slt, sra, srav, lui, ori, bne。  
     - 如果要做的運算是 bne 且相減結果不等於零，則 zero 等於 1。  
     - 如果要做的運算是 beq 且相減結果等於零，則 zero 也等於 1。  
-    - 為了做出 sra、srav 的運算，把 src2_i 改成 signed 的型態，並且增加一個 input shamt_i 將 instruction 的第 6~10 位傳入 module，判斷 sra 指令要右移幾位。
-    - 要做出 lui 的運算，直接將第 0~15 位的數字換到第 16~31 位，原本的第 0~15 位則都為 0。
+    - 為了做出 sra、srav 的運算，把 src2_i 改成 signed 的型態，並且增加一個 input shamt_i 將 instruction 的第6 ~ 10位傳入 module，判斷 sra 指令要右移幾位。
+    - 要做出 lui 的運算，直接將第0 ~ 15位的數字換到第16 ~ 31位，原本的第0 ~ 15位則都為 0。
 4. Adder.v  
 把兩數相加並輸出。
 5. MUX_2to1.v  
@@ -76,6 +76,6 @@ The file”CO_P2_Result.txt” will be generated after executing the Testbench. 
 將 PC 的 output 結果接到 IM，IM 再根據傳入的 address 讀出 register 裡面 的 instruction。
     - Decoder, Mux_Write_Reg, RF, Mux_PC_Source, Mux_ALUSrc, AC: Decoder 將 IM 輸出的指令第 31~26bit 接進來，然後根據指令種類分別控制 Mux_Write_Reg, RF, Mux_PC_Source, Mux_ALUSrc, AC。
     - IM, RF, Mux_Write_Reg, SE, AC:
-將 IM 輸出的指令第 25~21, 20~16 位傳入 RF，輸出兩個 register 的兩筆資料; 第 20~16, 15~11 位傳入 Mux_Write_Reg，判斷要把運算結果存到哪個 register;第 15~0 位傳入 SE，若 instruction 為 I-type，則第 15~0 位為一個 常數，將該常數做 sign extension 然後輸出，若 instruction 為 J-type，則第 15~0 位為一個 address，將該常數做 sign extension 然後輸出;第 6~0 位傳入 AC，AC 判斷做出甚麼運算後再傳入 ALU。
+將 IM 輸出的指令第25 ~ 21, 20 ~ 16位傳入 RF，輸出兩個 register 的兩筆資料; 第20 ~ 16, 15 ~ 11位傳入 Mux_Write_Reg，判斷要把運算結果存到哪個 register;第15 ~ 0位傳入 SE，若 instruction 為 I-type，則第15 ~ 0位為一個 常數，將該常數做 sign extension 然後輸出，若 instruction 為 J-type，則第15 ~ 0位為一個 address，將該常數做 sign extension 然後輸出;第 6 ~ 0位傳入 AC，AC 判斷做出甚麼運算後再傳入 ALU。
     - RF, Mux_ALUSrc, AC, ALU, Mux_PC_Source:
 ALU 根據 AC 的結果判斷要做甚麼運算，然後將 RE 和 Mux_ALUSrc 的 output 做運算，並將運算結果傳回 RF，讓 RF 將結果寫入 register。若 instruction 為 J-type 指令，則將 output zero_o 傳入 Mux_PC_Source
