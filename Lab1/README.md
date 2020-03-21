@@ -26,14 +26,14 @@ The goal of this LAB is to implement a 32-bit ALU (Arithmetic Logic Unit). ALU i
 ### Description of Implementation
 
 1. alu_top.v
-首先，透過兩個 Mux 決定輸入的source1, 2要不要 invert，接著再從輸入的operation判斷要執行甚麼運算。
+首先，透過兩個 Mux 決定輸入的source1, 2要不要 invert，接著再從輸入的operation判斷要執行甚麼運算。  
     - 如果 operation 是 00，表示 A 和 B 要做 AND，所以 result 是 A&B，cout 是 0。
     - 如果 operation 是 01，表示 A 和 B 要做 OR，所以 result 是 A|B，cout 是 0。
     - 如果 operation 是 10，表示 A 和 B 要相加，所以 result 是 A 和 B 和 Cin 做 XOR，cout 是 A, B, Cin 兩兩做 AND 再 OR 起來。
     - 如果 operation 是 11，表示 A 和 B 的大小判斷，若 A>B 輸出 1，否則輸出 0。大小比較的方法是將兩數相減，若減完的結果是負的，則可知 A 比 B 小。判斷的方法是檢查兩數相減後的 sign bit，如果是 1 則代表是 A less than B，故輸出 1。
 
 2. alu.v
-首先，透過 ALU_control 判斷要執行甚麼運算。
+首先，透過 ALU_control 判斷要執行甚麼運算。  
     - 如果 ALU_control 是 0000，表示 src_1, src_2 要做 AND，因此讓傳入 alu_1bit 的 operation 是 2’b00，做 AND 運算，A 和 B 不 invert。
     - 如果 ALU_control 是 0001，表示 src_1, src_2 要做 OR，因此讓傳入 alu_1bit 的 operation 是 2’b01，做 OR 運算，A 和 B 不 invert。
     - 如果 ALU_control 是 0010，表示 src_1, src_2 要相加，因此讓傳入 alu_1bit 的 operation 是 2’b10，A 和 B 不 invert，傳入 Full_Adder，加上 CarryIn 一起計算。
